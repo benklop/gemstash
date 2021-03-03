@@ -19,13 +19,11 @@ jobs:
           wait-on: tcp://0.0.0.0:9041, tcp://0.0.0.0:9042, tcp://0.0.0.0:9043, tcp://0.0.0.0:9044
       - name: increase ulimit
         run: ulimit -n 8192
-      - name: Update rubygems
-        run: gem update --system
       - name: Install Dependencies
-        run: gem install bundler && bin/setup
+        run: gem install bundler -v 1.17.3 && bundle _1.17.3_
       - name: Run Tests
-        run: bundle exec rspec --exclude-pattern "spec/integration_spec.rb"
+        run: bundle _1.17.3_ exec rspec --exclude-pattern "spec/integration_spec.rb"
       - name: Run Integration Tests
-        run: bundle exec rspec ./spec/integration_spec.rb
+        run: bundle _1.17.3_ exec rspec ./spec/integration_spec.rb
     timeout-minutes: 60
 
